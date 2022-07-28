@@ -33,5 +33,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: dfrazzitta/cicd:latest.v1  # Please change the username here
+        tags: dfrazzitta/testapp:latest.v1  # Please change the username here
         context: .     
