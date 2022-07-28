@@ -6,6 +6,7 @@ namespace testapp.Controllers
 {
     public class HomeController : Controller
     {
+        // git 1
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
