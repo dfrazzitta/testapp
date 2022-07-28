@@ -9,6 +9,7 @@ namespace testapp.Controllers
         // git 1
         // git 2
         // git 3
+        // git 4
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
