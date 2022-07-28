@@ -23,5 +23,15 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)      
+    - name: DockerHub login
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.USER }}
+        password: ${{  secrets.D_TOKEN }}
+          
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: dfrazzitta/cicd:latest.v1  # Please change the username here
+        context: .     
