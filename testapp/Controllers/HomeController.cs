@@ -22,10 +22,28 @@ namespace testapp.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<string> Privacy()
         {
-            return View();
+
+            using (var client1 = new System.Net.Http.HttpClient())
+            {
+                // Call *mywebapi*, and display its response in the page
+                var request = new System.Net.Http.HttpRequestMessage();
+                // request.RequestUri = new Uri("http://kapi/WeatherForecast/saveme"); // ASP.NET 3 (VS 2019 only)
+                string uriApi = "https://k8svc.net:5001/weatherforecast/";
+                request.RequestUri = new Uri(uriApi); // ASP.NET 3 (VS 2019 only)
+                // remember to localhost: any multi-container pods
+                // request.RequestUri = new Uri("http://kapi/api/KubernetesSystem/GetSystemData"); // ASP.NET 3 (VS 2019 only)
+                //request.RequestUri = new Uri("http://kapi/api/WeatherForecast/"); // ASP.NET 2.x
+                var response = await client1.SendAsync(request);
+                var resp = await response.Content.ReadAsStringAsync();
+                return resp;
+            }
+
+
+            return "";
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

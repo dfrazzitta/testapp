@@ -1,3 +1,5 @@
+using System.Net;
+
 namespace testapp
 {
     public class Program
@@ -8,6 +10,22 @@ namespace testapp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+
+                serverOptions.ConfigureEndpointDefaults(listenOptions =>
+                {
+
+                    listenOptions.UseHttps("/app/k8svc.pfx", "tvxs721#3");
+
+                });
+                serverOptions.Listen(IPAddress.Any, 443, listenOptions =>
+                {
+                    listenOptions.UseConnectionLogging();
+                });
+            });
+
 
             var app = builder.Build();
 
