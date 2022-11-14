@@ -4,6 +4,7 @@ namespace testapp
 {
     public class Program
     {
+        // a change
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
